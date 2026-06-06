@@ -1,59 +1,73 @@
-# ClinicalTriageFrontend
+# Clinical Triage - Frontend Repository
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.14.
+Backend Repository: [Backend](https://github.com/weerayosong/clinical-triage-backend)
 
-## Development server
+โปรเจกต์ทดลองสร้างระบบจัดการคิวและคัดกรองผู้ป่วยเบื้องต้น (Concept Application) ที่ออกแบบโดยคำนึงถึงความยืดหยุ่นในการแสดงผลแบบ Responsive และโครงสร้างระบบแบบ Enterprise
 
-To start a local development server, run:
+![clinical-triage-img](https://github.com/weerayosong/weerayosong.github.io/blob/main/images/gif/proj5.gif?raw=true)
 
-```bash
-ng serve
-```
+## วัตถุประสงค์ของโปรเจกต์ (Project Objective)
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+โปรเจกต์นี้เริ่มต้นขึ้นจากความตั้งใจที่จะท้าทายตัวเองในช่วงสุดสัปดาห์ เพื่อพาตัวเองออกจาก Comfort Zone และทดลองสัมผัสกับ Tech Stack ระดับองค์กรที่ผมยังไม่เคยมีประสบการณ์มาก่อน นั่นคือ **Angular** และ **Java Spring Boot**
 
-## Code scaffolding
+ในฐานะมือใหม่ที่เพิ่งเริ่มต้นกับ Stack นี้ ผมตระหนักดีถึงความซับซ้อนและ Learning Curve ที่ค่อนข้างสูง ทั้งในเรื่องของ Strict Typing, โครงสร้างแบบ Reactive และสถาปัตยกรรมหลังบ้านที่รัดกุม ผมจึงเลือกใช้วิธีการเรียนรู้แบบลงมือทำ Top-down Approach โดยมี AI เข้ามาเป็นผู้ช่วย เพื่อช่วยอธิบายคอนเซปต์ แนะนำแนวทางปฏิบัติที่ดี (Best Practices) และช่วยเร่งทำความเข้าใจโครงสร้างที่ซับซ้อนให้เห็นภาพชัดเจนขึ้น
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+แอปพลิเคชัน Clinical Triage ตัวนี้ จึงถูกสร้างขึ้นมาในฐานะ "ตัวต้นแบบเพื่อการศึกษา" ที่มุ่งเน้นทำความเข้าใจการไหลของข้อมูล และการเปลี่ยนสถานะของ State Transition มากกว่าความสมบูรณ์แบบของระบบทั้งหมด ผมยอมรับอย่างตรงไปตรงมาว่ายังคงมีกลไกเชิงลึกอีกมากมายใน Framework เหล่านี้ที่ผมยังต้องศึกษาเพิ่มเติม แต่โปรเจกต์เล็กๆ นี้ก็ถือเป็นก้าวแรกที่สำคัญที่จะช่วยให้ผมได้พัฒนาตัวเองขึ้นต่อไป
 
-```bash
-ng generate component component-name
-```
+## สถาปัตยกรรมระบบ (System Architecture)
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+[Architecture & System Design Documentation](https://admirable-malasada-3580eb.netlify.app)
 
-```bash
-ng generate --help
-```
+ระบบนี้ทำงานอยู่บนพื้นฐานของ **Client-Server Architecture** โดยแยกส่วนการแสดงผล User Interface ออกจากตรรกะทางธุรกิจ Business Logic และการจัดการข้อมูลอย่างชัดเจน:
 
-## Building
+- **Presentation Layer (ฝั่งหน้าบ้าน - Client):** พัฒนาเป็น Single Page Application (SPA) ด้วย Angular ทำหน้าที่จัดการ UI, การรับส่งข้อมูลจากผู้ใช้, และทำงานแบบ Responsive โดยเชื่อมต่อกับส่วนหลังบ้านผ่าน HTTP RESTful APIs เท่านั้น
+- **Application Layer (ฝั่งหลังบ้าน - Server):** ใช้ Java Spring Boot ทำหน้าที่เป็นหัวใจหลักในการประมวลผล (Business Logic) ตรวจสอบความถูกต้องของข้อมูล (Validation) และเตรียม REST Endpoints ที่ปลอดภัยให้หน้าบ้านเรียกใช้งาน
+- **Data Access Layer:** ใช้ Spring Data JPA (Hibernate) เป็นตัวกลางในการทำ ORM (Object-Relational Mapping) เพื่อแปลง Object ในภาษา Java (Entity) ให้ผูกกับตารางในฐานข้อมูล ช่วยลดความซับซ้อนของการเขียน SQL โดยตรง
+- **Data Persistence (ฐานข้อมูล):** จัดเก็บข้อมูลผู้ป่วย ระดับความเร่งด่วน และสถานะคิวลงใน PostgreSQL
 
-To build the project run:
+## รูปแบบการออกแบบซอฟต์แวร์ (Software Design Patterns)
 
-```bash
-ng build
-```
+### Backend (Spring Boot: โครงสร้างแบบ N-Tier Architecture)
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+โครงสร้างหลังบ้านถูกแบ่งเลเยอร์อย่างเป็นระเบียบ (Separation of Concerns) เพื่อให้โค้ดดูแลรักษาง่ายและพร้อมสำหรับการขยายตัว:
 
-## Running unit tests
+1. **Controller Layer:** เป็นด่านหน้าสำหรับรับ HTTP Requests จากหน้าบ้าน, อ่านค่าพารามิเตอร์, และส่ง Response กลับไปพร้อม HTTP Status Code ที่เหมาะสม
+2. **Service Layer:** ชั้นที่บรรจุตรรกะของแอปพลิเคชัน (Business Logic) ทั้งหมด เช่น กฎการย้ายสถานะคิวผู้ป่วย
+3. **Repository Layer:** ส่วนที่ทำหน้าที่สื่อสารกับฐานข้อมูลโดยตรง
+4. **Entity Model:** คลาส Java ที่เป็นตัวแทน (POJOs) ของโครงสร้างตารางข้อมูล
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+### Frontend (Angular: โครงสร้างแบบ Component-Based Architecture)
 
-```bash
-ng test
-```
+1. **Modular UI:** แบ่งหน้าจอเป็น Component ย่อยๆ ที่ทำงานอิสระต่อกัน (เช่น ส่วนฟอร์มเพิ่มข้อมูล และส่วนแสดงผลตาราง)
+2. **Service-Oriented Data Fetching:** สร้าง Angular Service แยกออกมาเพื่อรับผิดชอบการยิง API ผ่าน `HttpClient` โดยเฉพาะ ทำให้ Component หน้าจอไม่ต้องแบกรับภาระการเชื่อมต่อข้อมูล
+3. **Responsive & Adaptive Layout:** ใช้ Tailwind CSS v.4 ควบคุมเลย์เอาต์ โดยออกแบบให้หน้าจอเดสก์ท็อปแสดงผลเป็นบอร์ด Kanban แบบ 3 คอลัมน์ และปรับเป็นรูปแบบ Accordion (เปิด-ปิดทีละสถานะ) โดยอัตโนมัติเมื่อใช้งานบนหน้าจอมือถือ เพื่อประสบการณ์การใช้งานที่ลื่นไหลที่สุด
 
-## Running end-to-end tests
+## เครื่องมือและเทคโนโลยี (Technology Stack)
 
-For end-to-end (e2e) testing, run:
+**Frontend Environment:**
 
-```bash
-ng e2e
-```
+- Angular (TypeScript)
+- RxJS (Reactive Extensions for JavaScript)
+- Tailwind CSS v.4
+- HTML5 / Vanilla JS (Mockup UI)
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+**Backend Environment:**
 
-## Additional Resources
+- Java (JDK 17+)
+- Spring Boot 3.x
+- Spring Web (RESTful APIs)
+- Spring Data JPA
+- PostgreSQL Driver
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+**Infrastructure & Tooling:**
+
+- PostgreSQL
+- Maven (Dependency Management)
+- Node.js & npm
+- Git (Version Control)
+
+## ฟีเจอร์หลัก (Key Features)
+
+- **Triage Registration:** ระบบลงทะเบียนด่วนสำหรับคัดกรองผู้ป่วย โดยระบุอาการและระดับความเร่งด่วน (Normal, Urgent, Emergency)
+- **Dynamic Queue Board:** กระดานแสดงผลแบบ Kanban ที่อัปเดตสถานะของผู้ป่วยใน 3 ระยะ: รอรับการรักษา (Waiting), กำลังรักษา (In Treatment), และจำหน่ายกลับ (Discharged)
+- **Adaptive Mobile View:** อินเทอร์เฟซที่ปรับตัวเองให้เหมาะสมกับขนาดหน้าจอ ช่วยให้เจ้าหน้าที่ใช้งานผ่านอุปกรณ์พกพาได้อย่างสะดวก
