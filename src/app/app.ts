@@ -110,6 +110,24 @@ export class App implements OnInit {
     });
   }
 
+  deleteCase(id: number | undefined) {
+    if (!id) return;
+
+    // เพิ่มการแจ้งเตือน (Confirm Dialog) กันเผลอกดพลาด
+    if (confirm('Are you sure you want to delete this case? This action cannot be undone.')) {
+      this.patientService.deletePatient(id).subscribe({
+        next: () => {
+          // กรองข้อมูลคนที่ถูกลบออกจาก Array
+          this.patientsList = this.patientsList.filter((p) => p.id !== id);
+
+          this.displayToast('Case deleted successfully.');
+          this.cdr.detectChanges(); // สั่งวาดหน้าจอใหม่ทันที
+        },
+        error: (err) => console.error('Error deleting patient:', err),
+      });
+    }
+  }
+
   // --- Getters สำหรับแยกกลุ่มข้อมูล ---
   get waitingPatients() {
     return this.patientsList.filter((p) => p.status === 'WAITING');

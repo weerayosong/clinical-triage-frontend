@@ -27,4 +27,9 @@ export class PatientService {
   updateStatus(id: number, status: string): Observable<Patient> {
     return this.http.patch<Patient>(`${this.apiUrl}/${id}/status?status=${status}`, {});
   }
+
+  // 4. ฟังก์ชันลบผู้ป่วย
+  deletePatient(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  }
 }
