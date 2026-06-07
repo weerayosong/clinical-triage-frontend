@@ -3,12 +3,14 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Patient } from '../models/patient.model';
 
+import { environment } from '../../environments/environment';
+
 @Injectable({
   providedIn: 'root',
 })
 export class PatientService {
   // ชี้ไปยัง URL ของ Spring Boot
-  private apiUrl = 'http://localhost:8080/api/v1/patients';
+  private apiUrl = environment.apiUrl;
 
   // Inject HttpClient เข้ามาใช้งาน
   constructor(private http: HttpClient) {}
