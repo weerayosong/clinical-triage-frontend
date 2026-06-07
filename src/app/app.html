@@ -121,61 +121,79 @@
           class="overflow-y-auto p-3 flex-col gap-3 bg-slate-50/30 custom-scrollbar"
           [ngClass]="activeMobileTab === 'WAITING' || isDesktop ? 'flex flex-1' : 'hidden'"
         >
-          @for (patient of waitingPatients; track patient.id) {
-            <!-- Patient Card -->
-            <div
-              class="shrink-0 bg-teal-50 rounded-md border border-slate-100 overflow-hidden flex flex-col transition-all hover:shadow-sm"
-            >
+          @if (isLoading) {
+            @for (item of [1, 2, 3]; track item) {
               <div
-                class="h-1 w-full"
-                [ngClass]="{
-                  'bg-teal-400': patient.urgency === 'NORMAL',
-                  'bg-teal-400': patient.urgency === 'URGENT',
-                  'bg-teal-400': patient.urgency === 'EMERGENCY',
-                }"
-              ></div>
+                class="shrink-0 bg-white rounded-md border border-slate-100 p-3 flex flex-col gap-3 animate-pulse h-30"
+              >
+                <div class="h-1 w-full bg-slate-200 rounded-full"></div>
+                <div class="h-4 bg-slate-200 rounded w-1/2"></div>
+                <div class="space-y-2 flex-1">
+                  <div class="h-2 bg-slate-200 rounded"></div>
+                  <div class="h-2 bg-slate-200 rounded w-5/6"></div>
+                </div>
+                <div class="h-5 bg-slate-200 rounded w-16 mt-auto"></div>
+              </div>
+            }
+          } @else {
+            @for (patient of waitingPatients; track patient.id) {
+              <!-- Patient Card -->
+              <div
+                class="shrink-0 bg-slate-50 rounded-md border border-slate-100 overflow-hidden flex flex-col transition-all hover:shadow-sm"
+              >
+                <div
+                  class="h-1 w-full"
+                  [ngClass]="{
+                    'bg-teal-100': patient.urgency === 'NORMAL',
+                    'bg-yellow-100': patient.urgency === 'URGENT',
+                    'bg-rose-100': patient.urgency === 'EMERGENCY',
+                  }"
+                ></div>
 
-              <div class="p-3 flex-1 flex flex-col">
-                <div class="flex justify-between items-start mb-1">
-                  <h3 class="font-semibold text-slate-700 text-sm">{{ patient.name }}</h3>
+                <div class="p-3 flex-1 flex flex-col">
+                  <div class="flex justify-between items-start mb-1">
+                    <h3 class="font-semibold text-slate-700 text-sm">{{ patient.name }}</h3>
+                    <button
+                      (click)="deleteCase(patient.id)"
+                      class="text-slate-300 hover:text-rose-400 transition-colors ml-2 cursor-pointer"
+                      title="Delete Case"
+                    >
+                      <i class="fa-solid fa-user-xmark"></i>
+                    </button>
+                  </div>
+
+                  <p class="text-xs text-slate-500 mt-1 mb-3 flex-1">{{ patient.symptoms }}</p>
+                  <div class="flex items-center justify-between mt-auto">
+                    <span
+                      class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-sm border"
+                      [ngClass]="{
+                        'bg-slate-50 text-slate-500 border-slate-200': patient.urgency === 'NORMAL',
+                        'bg-yellow-100 text-yellow-500 border-yellow-200':
+                          patient.urgency === 'URGENT',
+                        'bg-rose-300 text-white border-rose-300 shadow-sm':
+                          patient.urgency === 'EMERGENCY',
+                      }"
+                    >
+                      {{ patient.urgency }}
+                    </span>
+                  </div>
+                </div>
+                <div class="bg-slate-50/50 border-t border-slate-50 p-2 flex gap-2">
                   <button
-                    (click)="deleteCase(patient.id)"
-                    class="text-slate-300 hover:text-rose-400 transition-colors ml-2 cursor-pointer"
-                    title="Delete Case"
+                    (click)="updatePatientStatus(patient.id, 'IN_TREATMENT')"
+                    class="flex-1 bg-white border border-teal-400 text-teal-500 text-xs font-medium py-1.5 rounded-sm hover:bg-teal-50 transition-colors cursor-pointer"
                   >
-                    <i class="fa-solid fa-user-xmark"></i>
+                    Start Treatment
                   </button>
                 </div>
-
-                <p class="text-xs text-slate-500 mt-1 mb-3 flex-1">{{ patient.symptoms }}</p>
-                <div class="flex items-center justify-between mt-auto">
-                  <span
-                    class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-sm border"
-                    [ngClass]="{
-                      'bg-slate-50 text-slate-500 border-slate-200': patient.urgency === 'NORMAL',
-                      'bg-yellow-100 text-yellow-500 border-yellow-200':
-                        patient.urgency === 'URGENT',
-                      'bg-rose-300 text-white border-rose-300 shadow-sm':
-                        patient.urgency === 'EMERGENCY',
-                    }"
-                  >
-                    {{ patient.urgency }}
-                  </span>
-                </div>
               </div>
-              <div class="bg-slate-50/50 border-t border-slate-50 p-2 flex gap-2">
-                <button
-                  (click)="updatePatientStatus(patient.id, 'IN_TREATMENT')"
-                  class="flex-1 bg-white border border-teal-400 text-teal-500 text-xs font-medium py-1.5 rounded-sm hover:bg-teal-50 transition-colors cursor-pointer"
-                >
-                  Start Treatment
-                </button>
+            } @empty {
+              <div
+                class="flex-1 flex items-center justify-center text-slate-300 text-xs font-medium"
+              >
+                <p>No waiting patients</p>
               </div>
-            </div>
-          } @empty {
-            <div class="flex-1 flex items-center justify-center text-slate-300 text-xs font-medium">
-              <p>No waiting patients</p>
-            </div>
+            }
           }
         </div>
       </div>
@@ -209,66 +227,84 @@
           class="overflow-y-auto p-3 flex-col gap-3 bg-slate-50/30 custom-scrollbar"
           [ngClass]="activeMobileTab === 'IN_TREATMENT' || isDesktop ? 'flex flex-1' : 'hidden'"
         >
-          @for (patient of treatmentPatients; track patient.id) {
-            <div
-              class="shrink-0 bg-teal-50 rounded-md border border-slate-100 overflow-hidden flex flex-col transition-all hover:shadow-sm"
-            >
+          @if (isLoading) {
+            @for (item of [1, 2, 3]; track item) {
               <div
-                class="h-1 w-full"
-                [ngClass]="{
-                  'bg-teal-400': patient.urgency === 'NORMAL',
-                  'bg-teal-400': patient.urgency === 'URGENT',
-                  'bg-teal-400': patient.urgency === 'EMERGENCY',
-                }"
-              ></div>
-              <div class="p-3 flex-1 flex flex-col">
-                <div class="flex justify-between items-start mb-1">
-                  <h3 class="font-semibold text-slate-700 text-sm">{{ patient.name }}</h3>
+                class="shrink-0 bg-white rounded-md border border-slate-100 p-3 flex flex-col gap-3 animate-pulse h-30"
+              >
+                <div class="h-1 w-full bg-slate-200 rounded-full"></div>
+                <div class="h-4 bg-slate-200 rounded w-1/2"></div>
+                <div class="space-y-2 flex-1">
+                  <div class="h-2 bg-slate-200 rounded"></div>
+                  <div class="h-2 bg-slate-200 rounded w-5/6"></div>
+                </div>
+                <div class="h-5 bg-slate-200 rounded w-16 mt-auto"></div>
+              </div>
+            }
+          } @else {
+            @for (patient of treatmentPatients; track patient.id) {
+              <div
+                class="shrink-0 bg-slate-50 rounded-md border border-slate-100 overflow-hidden flex flex-col transition-all hover:shadow-sm"
+              >
+                <div
+                  class="h-1 w-full"
+                  [ngClass]="{
+                    'bg-teal-100': patient.urgency === 'NORMAL',
+                    'bg-yellow-100': patient.urgency === 'URGENT',
+                    'bg-rose-100': patient.urgency === 'EMERGENCY',
+                  }"
+                ></div>
+                <div class="p-3 flex-1 flex flex-col">
+                  <div class="flex justify-between items-start mb-1">
+                    <h3 class="font-semibold text-slate-700 text-sm">{{ patient.name }}</h3>
+                    <button
+                      (click)="deleteCase(patient.id)"
+                      class="text-slate-300 hover:text-rose-400 transition-colors ml-2 cursor-pointer"
+                      title="Delete Case"
+                    >
+                      <i class="fa-solid fa-user-xmark"></i>
+                    </button>
+                  </div>
+
+                  <p class="text-xs text-slate-500 mt-1 mb-3 flex-1">{{ patient.symptoms }}</p>
+                  <div class="flex items-center justify-between mt-auto">
+                    <span
+                      class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-sm border"
+                      [ngClass]="{
+                        'bg-slate-50 text-slate-500 border-slate-200': patient.urgency === 'NORMAL',
+                        'bg-yellow-100 text-yellow-500 border-yellow-200':
+                          patient.urgency === 'URGENT',
+                        'bg-rose-300 text-white border-rose-300 shadow-sm':
+                          patient.urgency === 'EMERGENCY',
+                      }"
+                    >
+                      {{ patient.urgency }}
+                    </span>
+                  </div>
+                </div>
+                <div class="bg-slate-50/50 border-t border-slate-50 p-2 flex gap-2">
                   <button
-                    (click)="deleteCase(patient.id)"
-                    class="text-slate-300 hover:text-rose-400 transition-colors ml-2 cursor-pointer"
-                    title="Delete Case"
+                    (click)="updatePatientStatus(patient.id, 'WAITING')"
+                    class="px-3 bg-white border border-slate-200 text-slate-400 text-xs font-medium py-1.5 rounded-sm hover:bg-slate-50 transition-colors cursor-pointer"
+                    title="Return"
                   >
-                    <i class="fa-solid fa-user-xmark"></i>
+                    <i class="fa-solid fa-arrow-left"></i>
+                  </button>
+                  <button
+                    (click)="updatePatientStatus(patient.id, 'DISCHARGED')"
+                    class="flex-1 bg-teal-400 text-white text-xs font-medium py-1.5 rounded-sm hover:bg-teal-500 transition-colors cursor-pointer shadow-sm"
+                  >
+                    Discharge
                   </button>
                 </div>
-
-                <p class="text-xs text-slate-500 mt-1 mb-3 flex-1">{{ patient.symptoms }}</p>
-                <div class="flex items-center justify-between mt-auto">
-                  <span
-                    class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-sm border"
-                    [ngClass]="{
-                      'bg-slate-50 text-slate-500 border-slate-200': patient.urgency === 'NORMAL',
-                      'bg-yellow-100 text-yellow-500 border-yellow-200':
-                        patient.urgency === 'URGENT',
-                      'bg-rose-300 text-white border-rose-300 shadow-sm':
-                        patient.urgency === 'EMERGENCY',
-                    }"
-                  >
-                    {{ patient.urgency }}
-                  </span>
-                </div>
               </div>
-              <div class="bg-slate-50/50 border-t border-slate-50 p-2 flex gap-2">
-                <button
-                  (click)="updatePatientStatus(patient.id, 'WAITING')"
-                  class="px-3 bg-white border border-slate-200 text-slate-400 text-xs font-medium py-1.5 rounded-sm hover:bg-slate-50 transition-colors cursor-pointer"
-                  title="Return"
-                >
-                  <i class="fa-solid fa-arrow-left"></i>
-                </button>
-                <button
-                  (click)="updatePatientStatus(patient.id, 'DISCHARGED')"
-                  class="flex-1 bg-teal-400 text-white text-xs font-medium py-1.5 rounded-sm hover:bg-teal-500 transition-colors cursor-pointer shadow-sm"
-                >
-                  Discharge
-                </button>
+            } @empty {
+              <div
+                class="flex-1 flex items-center justify-center text-slate-300 text-xs font-medium"
+              >
+                <p>No active treatments</p>
               </div>
-            </div>
-          } @empty {
-            <div class="flex-1 flex items-center justify-center text-slate-300 text-xs font-medium">
-              <p>No active treatments</p>
-            </div>
+            }
           }
         </div>
       </div>
@@ -302,30 +338,48 @@
           class="overflow-y-auto p-3 flex-col gap-3 bg-slate-50/30 custom-scrollbar"
           [ngClass]="activeMobileTab === 'DISCHARGED' || isDesktop ? 'flex flex-1' : 'hidden'"
         >
-          @for (patient of dischargedPatients; track patient.id) {
-            <div
-              class="shrink-0 bg-slate-100 rounded-md border border-slate-100 overflow-hidden flex flex-col transition-all hover:shadow-sm opacity-60"
-            >
-              <div class="h-1 w-full bg-slate-200"></div>
-              <div class="p-3 flex-1 flex flex-col">
-                <div class="flex justify-between items-start mb-1">
-                  <h3 class="font-semibold text-slate-700 text-sm">{{ patient.name }}</h3>
-                  <button
-                    (click)="deleteCase(patient.id)"
-                    class="text-slate-300 hover:text-rose-400 transition-colors ml-2 cursor-pointer"
-                    title="Delete Case"
-                  >
-                    <i class="fa-solid fa-user-xmark"></i>
-                  </button>
+          @if (isLoading) {
+            @for (item of [1, 2, 3]; track item) {
+              <div
+                class="shrink-0 bg-white rounded-md border border-slate-100 p-3 flex flex-col gap-3 animate-pulse h-30"
+              >
+                <div class="h-1 w-full bg-slate-200 rounded-full"></div>
+                <div class="h-4 bg-slate-200 rounded w-1/2"></div>
+                <div class="space-y-2 flex-1">
+                  <div class="h-2 bg-slate-200 rounded"></div>
+                  <div class="h-2 bg-slate-200 rounded w-5/6"></div>
                 </div>
-
-                <p class="text-xs text-slate-500 mt-1 flex-1">{{ patient.symptoms }}</p>
+                <div class="h-5 bg-slate-200 rounded w-16 mt-auto"></div>
               </div>
-            </div>
-          } @empty {
-            <div class="flex-1 flex items-center justify-center text-slate-300 text-xs font-medium">
-              <p>No discharged patients</p>
-            </div>
+            }
+          } @else {
+            @for (patient of dischargedPatients; track patient.id) {
+              <div
+                class="shrink-0 bg-slate-100 rounded-md border border-slate-100 overflow-hidden flex flex-col transition-all hover:shadow-sm opacity-60"
+              >
+                <div class="h-1 w-full bg-slate-200"></div>
+                <div class="p-3 flex-1 flex flex-col">
+                  <div class="flex justify-between items-start mb-1">
+                    <h3 class="font-semibold text-slate-700 text-sm">{{ patient.name }}</h3>
+                    <button
+                      (click)="deleteCase(patient.id)"
+                      class="text-slate-300 hover:text-rose-400 transition-colors ml-2 cursor-pointer"
+                      title="Delete Case"
+                    >
+                      <i class="fa-solid fa-user-xmark"></i>
+                    </button>
+                  </div>
+
+                  <p class="text-xs text-slate-500 mt-1 flex-1">{{ patient.symptoms }}</p>
+                </div>
+              </div>
+            } @empty {
+              <div
+                class="flex-1 flex items-center justify-center text-slate-300 text-xs font-medium"
+              >
+                <p>No discharged patients</p>
+              </div>
+            }
           }
         </div>
       </div>

@@ -13,6 +13,7 @@ import { Patient } from './models/patient.model';
 export class App implements OnInit {
   // --- Data State ---
   patientsList: Patient[] = [];
+  isLoading: boolean = true;
 
   // ตัวแปรสำหรับรับค่าจากฟอร์ม
   newPatient: Patient = {
@@ -58,12 +59,18 @@ export class App implements OnInit {
 
   // --- API Integrations ---
   loadPatients() {
+    this.isLoading = true;
     this.patientService.getAllPatients().subscribe({
       next: (data) => {
         this.patientsList = data;
+        this.isLoading = false;
         this.cdr.detectChanges();
       },
-      error: (err) => console.error('Error loading patients:', err),
+      error: (err) => {
+        console.error('Error loading patients:', err);
+        this.isLoading = false; // ถึงจะเออเร่อก็ต้องปิดสถานะการโหลด
+        this.cdr.detectChanges();
+      },
     });
   }
 
