@@ -90,21 +90,17 @@ export class App implements OnInit {
   updatePatientStatus(id: number | undefined, newStatus: string) {
     if (!id) return;
 
+    // optimistic opdate
+    const index = this.patientsList.findIndex((p) => p.id === id);
+    if (index !== -1) {
+      this.patientsList[index].status = newStatus as any; // แก้ค่า status ไปเลย
+      if (!this.isDesktop) this.activeMobileTab = newStatus;
+      this.cdr.detectChanges(); // วาดหน้าจอใหม่ทันที ไม่ต้องรอ API!
+    }
+
     this.patientService.updateStatus(id, newStatus).subscribe({
-      next: (updatedPatient) => {
-        // หาและอัปเดตข้อมูลใน Array
-        const index = this.patientsList.findIndex((p) => p.id === id);
-        if (index !== -1) {
-          this.patientsList[index] = updatedPatient;
-        }
-
+      next: () => {
         this.displayToast(`Moved to ${newStatus.replace('_', ' ')}.`);
-
-        // ปรับหน้าต่างบนมือถืออัตโนมัติ
-        if (!this.isDesktop) {
-          this.activeMobileTab = newStatus;
-        }
-        this.cdr.detectChanges();
       },
       error: (err) => console.error('Error updating status:', err),
     });
@@ -113,15 +109,15 @@ export class App implements OnInit {
   deleteCase(id: number | undefined) {
     if (!id) return;
 
-    // เพิ่มการแจ้งเตือน (Confirm Dialog) กันเผลอกดพลาด
     if (confirm('Are you sure you want to delete this case? This action cannot be undone.')) {
+      // อัปเดต UI ทันที เตะออกจาก Array แล้ววาดจอใหม่
+      this.patientsList = this.patientsList.filter((p) => p.id !== id);
+      this.cdr.detectChanges();
+
+      // ส่งคำสั่งลบไปหา Spring Boot
       this.patientService.deletePatient(id).subscribe({
         next: () => {
-          // กรองข้อมูลคนที่ถูกลบออกจาก Array
-          this.patientsList = this.patientsList.filter((p) => p.id !== id);
-
           this.displayToast('Case deleted successfully.');
-          this.cdr.detectChanges(); // สั่งวาดหน้าจอใหม่ทันที
         },
         error: (err) => console.error('Error deleting patient:', err),
       });

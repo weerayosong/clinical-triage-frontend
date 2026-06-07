@@ -129,9 +129,9 @@
               <div
                 class="h-1 w-full"
                 [ngClass]="{
-                  'bg-slate-300': patient.urgency === 'NORMAL',
+                  'bg-teal-400': patient.urgency === 'NORMAL',
                   'bg-teal-400': patient.urgency === 'URGENT',
-                  'bg-teal-800': patient.urgency === 'EMERGENCY',
+                  'bg-teal-400': patient.urgency === 'EMERGENCY',
                 }"
               ></div>
 
@@ -147,15 +147,15 @@
                   </button>
                 </div>
 
-                <h3 class="font-semibold text-slate-700 text-sm">{{ patient.name }}</h3>
                 <p class="text-xs text-slate-500 mt-1 mb-3 flex-1">{{ patient.symptoms }}</p>
                 <div class="flex items-center justify-between mt-auto">
                   <span
                     class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-sm border"
                     [ngClass]="{
                       'bg-slate-50 text-slate-500 border-slate-200': patient.urgency === 'NORMAL',
-                      'bg-teal-50 text-teal-600 border-teal-200': patient.urgency === 'URGENT',
-                      'bg-teal-700 text-white border-teal-800 shadow-sm':
+                      'bg-yellow-100 text-yellow-500 border-yellow-200':
+                        patient.urgency === 'URGENT',
+                      'bg-rose-300 text-white border-rose-300 shadow-sm':
                         patient.urgency === 'EMERGENCY',
                     }"
                   >
@@ -216,9 +216,9 @@
               <div
                 class="h-1 w-full"
                 [ngClass]="{
-                  'bg-slate-300': patient.urgency === 'NORMAL',
+                  'bg-teal-400': patient.urgency === 'NORMAL',
                   'bg-teal-400': patient.urgency === 'URGENT',
-                  'bg-teal-800': patient.urgency === 'EMERGENCY',
+                  'bg-teal-400': patient.urgency === 'EMERGENCY',
                 }"
               ></div>
               <div class="p-3 flex-1 flex flex-col">
@@ -233,15 +233,15 @@
                   </button>
                 </div>
 
-                <h3 class="font-semibold text-slate-700 text-sm">{{ patient.name }}</h3>
                 <p class="text-xs text-slate-500 mt-1 mb-3 flex-1">{{ patient.symptoms }}</p>
                 <div class="flex items-center justify-between mt-auto">
                   <span
                     class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-sm border"
                     [ngClass]="{
                       'bg-slate-50 text-slate-500 border-slate-200': patient.urgency === 'NORMAL',
-                      'bg-teal-50 text-teal-600 border-teal-200': patient.urgency === 'URGENT',
-                      'bg-teal-700 text-white border-teal-800 shadow-sm':
+                      'bg-yellow-100 text-yellow-500 border-yellow-200':
+                        patient.urgency === 'URGENT',
+                      'bg-rose-300 text-white border-rose-300 shadow-sm':
                         patient.urgency === 'EMERGENCY',
                     }"
                   >
@@ -318,7 +318,7 @@
                     <i class="fa-solid fa-user-xmark"></i>
                   </button>
                 </div>
-                <h3 class="font-semibold text-slate-700 text-sm">{{ patient.name }}</h3>
+
                 <p class="text-xs text-slate-500 mt-1 flex-1">{{ patient.symptoms }}</p>
               </div>
             </div>
