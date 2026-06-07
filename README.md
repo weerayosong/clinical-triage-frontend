@@ -1,73 +1,88 @@
 # Clinical Triage - Frontend Repository
 
-Backend Repository: [Backend](https://github.com/weerayosong/clinical-triage-backend)
+Backend Repository: [Backend](https://github.com/weerayosong/clinical-triage-backend)  
+Live Preview: [Demo](https://clinical-triage-frontend.vercel.app/)
 
-โปรเจกต์ทดลองสร้างระบบจัดการคิวและคัดกรองผู้ป่วยเบื้องต้น (Concept Application) ที่ออกแบบโดยคำนึงถึงความยืดหยุ่นในการแสดงผลแบบ Responsive และโครงสร้างระบบแบบ Enterprise
+โปรเจกต์ต้นแบบแอปพลิเคชัน (Concept Application) สำหรับระบบจัดการคิวและคัดกรองผู้ป่วยเบื้องต้น ที่ได้รับการออกแบบโดยให้ความสำคัญกับความยืดหยุ่นในการแสดงผล (Responsive Design) และโครงสร้างระบบสถาปัตยกรรมระดับองค์กร (Enterprise Architecture)
 
-![clinical-triage-img](https://github.com/weerayosong/weerayosong.github.io/blob/main/images/gif/proj5.gif?raw=true)
+![clinical-triage-img](https://github.com/weerayosong/weerayosong.github.io/blob/main/images/gif/proj5b.gif?raw=true)
 
 ## วัตถุประสงค์ของโปรเจกต์ (Project Objective)
 
-โปรเจกต์นี้เริ่มต้นขึ้นจากความตั้งใจที่จะท้าทายตัวเองในช่วงสุดสัปดาห์ เพื่อพาตัวเองออกจาก Comfort Zone และทดลองสัมผัสกับ Tech Stack ระดับองค์กรที่ผมยังไม่เคยมีประสบการณ์มาก่อน นั่นคือ **Angular** และ **Java Spring Boot**
+โปรเจกต์นี้เริ่มต้นขึ้นจากความตั้งใจที่จะท้าทายตัวเองในช่วงสุดสัปดาห์ เพื่อพาตัวเองออกจาก Comfort Zone และทดลองสัมผัสกับ Tech Stack ระดับองค์กร ที่ยังไม่เคยมีประสบการณ์ในการพัฒนามาก่อน นั่นคือ **Angular** และ **Java Spring Boot**
 
-ในฐานะมือใหม่ที่เพิ่งเริ่มต้นกับ Stack นี้ ผมตระหนักดีถึงความซับซ้อนและ Learning Curve ที่ค่อนข้างสูง ทั้งในเรื่องของ Strict Typing, โครงสร้างแบบ Reactive และสถาปัตยกรรมหลังบ้านที่รัดกุม ผมจึงเลือกใช้วิธีการเรียนรู้แบบลงมือทำ Top-down Approach โดยมี AI เข้ามาเป็นผู้ช่วย เพื่อช่วยอธิบายคอนเซปต์ แนะนำแนวทางปฏิบัติที่ดี (Best Practices) และช่วยเร่งทำความเข้าใจโครงสร้างที่ซับซ้อนให้เห็นภาพชัดเจนขึ้น
+ในฐานะมือใหม่ที่เพิ่งเริ่มต้นกับ Stack นี้ ผมตระหนักดีถึงความซับซ้อนและ Learning Curve ที่ค่อนข้างสูง ทั้งในเรื่องของ Strict Typing, โครงสร้างแบบ Reactive และสถาปัตยกรรมหลังบ้านที่รัดกุม ทั้งนี้จึงเลือกใช้วิธีการเรียนรู้แบบลงมือทำ Top-down Approach โดยมี AI เข้ามาเป็นผู้ช่วย เพื่อช่วยอธิบายคอนเซปต์ แนะนำแนวทางปฏิบัติที่ดี (Best Practices) และช่วยเร่งทำความเข้าใจโครงสร้างที่ซับซ้อนให้เห็นภาพชัดเจนขึ้น
 
-แอปพลิเคชัน Clinical Triage ตัวนี้ จึงถูกสร้างขึ้นมาในฐานะ "ตัวต้นแบบเพื่อการศึกษา" ที่มุ่งเน้นทำความเข้าใจการไหลของข้อมูล และการเปลี่ยนสถานะของ State Transition มากกว่าความสมบูรณ์แบบของระบบทั้งหมด ผมยอมรับอย่างตรงไปตรงมาว่ายังคงมีกลไกเชิงลึกอีกมากมายใน Framework เหล่านี้ที่ผมยังต้องศึกษาเพิ่มเติม แต่โปรเจกต์เล็กๆ นี้ก็ถือเป็นก้าวแรกที่สำคัญที่จะช่วยให้ผมได้พัฒนาตัวเองขึ้นต่อไป
+แอปพลิเคชัน Clinical Triage ตัวนี้ จึงถูกสร้างขึ้นมาในฐานะ "ตัวต้นแบบเพื่อการศึกษา" ที่มุ่งเน้นทำความเข้าใจการไหลของข้อมูล และการเปลี่ยนสถานะของ State Transition มากกว่าความสมบูรณ์แบบของระบบทั้งหมด ยังคงมีกลไกเชิงลึกอีกมากมายใน Framework เหล่านี้ที่ผมยังต้องศึกษาเพิ่มเติม แต่โปรเจกต์เล็กๆ นี้ก็ถือเป็นก้าวแรกที่สำคัญที่จะช่วยในการพัฒนาตัวเองขึ้นต่อไป
 
-## สถาปัตยกรรมระบบ (System Architecture)
+## การออกแบบ & สถาปัตยกรรมระบบ (Architecture & System Design)
 
 [Architecture & System Design Documentation](https://admirable-malasada-3580eb.netlify.app)
 
-ระบบนี้ทำงานอยู่บนพื้นฐานของ **Client-Server Architecture** โดยแยกส่วนการแสดงผล User Interface ออกจากตรรกะทางธุรกิจ Business Logic และการจัดการข้อมูลอย่างชัดเจน:
+## สถาปัตยกรรมระบบฝั่งหน้าบ้าน (Frontend Architecture)
 
-- **Presentation Layer (ฝั่งหน้าบ้าน - Client):** พัฒนาเป็น Single Page Application (SPA) ด้วย Angular ทำหน้าที่จัดการ UI, การรับส่งข้อมูลจากผู้ใช้, และทำงานแบบ Responsive โดยเชื่อมต่อกับส่วนหลังบ้านผ่าน HTTP RESTful APIs เท่านั้น
-- **Application Layer (ฝั่งหลังบ้าน - Server):** ใช้ Java Spring Boot ทำหน้าที่เป็นหัวใจหลักในการประมวลผล (Business Logic) ตรวจสอบความถูกต้องของข้อมูล (Validation) และเตรียม REST Endpoints ที่ปลอดภัยให้หน้าบ้านเรียกใช้งาน
-- **Data Access Layer:** ใช้ Spring Data JPA (Hibernate) เป็นตัวกลางในการทำ ORM (Object-Relational Mapping) เพื่อแปลง Object ในภาษา Java (Entity) ให้ผูกกับตารางในฐานข้อมูล ช่วยลดความซับซ้อนของการเขียน SQL โดยตรง
-- **Data Persistence (ฐานข้อมูล):** จัดเก็บข้อมูลผู้ป่วย ระดับความเร่งด่วน และสถานะคิวลงใน PostgreSQL
+แอปพลิเคชันฝั่ง Client ทำงานในรูปแบบ **Single Page Application (SPA)**โดยมุ่งเน้นที่การแยกส่วนตรรกะทางธุรกิจและการแสดงผลออกจากกัน (Separation of Concerns):
 
-## รูปแบบการออกแบบซอฟต์แวร์ (Software Design Patterns)
+- **Component-Based Architecture:** แบ่งส่วนการทำงานของหน้าจอ (UI) ออกเป็นโมดูลและคอมโพเนนต์ย่อยที่ทำงานเป็นอิสระต่อกัน (เช่น ส่วนฟอร์มรับข้อมูลผู้ป่วย และกระดานคิว)
+- **Service-Oriented Data Fetching:** จัดการการเชื่อมต่อข้อมูลแบบรวมศูนย์ผ่าน Angular Service ด้วย `HttpClient` เพื่อลดภาระการทำงานของ Component และทำให้โค้ดมีความเป็นระเบียบ
+- **Adaptive & Responsive Layout:** ควบคุมการแสดงผลเลย์เอาต์ด้วย Tailwind CSS v.4 โดยระบบจะปรับการทำงานจากกระดาน Kanban แบบ 3 คอลัมน์บนหน้าจอเดสก์ท็อป เป็นรูปแบบ Accordion (ซ่อน-แสดงทีละสถานะ) โดยอัตโนมัติบนอุปกรณ์เคลื่อนที่
 
-### Backend (Spring Boot: โครงสร้างแบบ N-Tier Architecture)
+---
 
-โครงสร้างหลังบ้านถูกแบ่งเลเยอร์อย่างเป็นระเบียบ (Separation of Concerns) เพื่อให้โค้ดดูแลรักษาง่ายและพร้อมสำหรับการขยายตัว:
+## ฟีเจอร์การทำงานหลัก (Key Features)
 
-1. **Controller Layer:** เป็นด่านหน้าสำหรับรับ HTTP Requests จากหน้าบ้าน, อ่านค่าพารามิเตอร์, และส่ง Response กลับไปพร้อม HTTP Status Code ที่เหมาะสม
-2. **Service Layer:** ชั้นที่บรรจุตรรกะของแอปพลิเคชัน (Business Logic) ทั้งหมด เช่น กฎการย้ายสถานะคิวผู้ป่วย
-3. **Repository Layer:** ส่วนที่ทำหน้าที่สื่อสารกับฐานข้อมูลโดยตรง
-4. **Entity Model:** คลาส Java ที่เป็นตัวแทน (POJOs) ของโครงสร้างตารางข้อมูล
+- **Triage Registration:** ระบบลงทะเบียนผู้ป่วยฉุกเฉิน พร้อมการจัดระดับความเร่งด่วนทางคลินิก (Normal, Urgent, Emergency)
+- **Dynamic Queue Board:** กระดานแสดงผลข้อมูลผู้ป่วยแบบ Kanban board แบ่งตามระยะการบริการ: รอรับการรักษา (Waiting), กำลังรักษา (In Treatment), และจำหน่ายกลับ (Discharged)
+- **Optimistic UI Updates:** ระบบปรับปรุงสถานะหน้าจอทันทีเมื่อเกิดการโต้ตอบจากผู้ใช้ (Action) โดยไม่ต้องรอผลลัพธ์ตอบกลับจากเซิร์ฟเวอร์ เพื่อประสบการณ์การใช้งานที่ไร้รอยต่อ
+- **Skeleton Loading State:** ระบบแสดงผลส่วนโครงร่างแบบแอนิเมชัน (Skeleton) ระหว่างรอข้อมูลจาก API ป้องกันการเกิดเลย์เอาต์กระตุกและเพิ่มคุณภาพด้าน UX
 
-### Frontend (Angular: โครงสร้างแบบ Component-Based Architecture)
-
-1. **Modular UI:** แบ่งหน้าจอเป็น Component ย่อยๆ ที่ทำงานอิสระต่อกัน (เช่น ส่วนฟอร์มเพิ่มข้อมูล และส่วนแสดงผลตาราง)
-2. **Service-Oriented Data Fetching:** สร้าง Angular Service แยกออกมาเพื่อรับผิดชอบการยิง API ผ่าน `HttpClient` โดยเฉพาะ ทำให้ Component หน้าจอไม่ต้องแบกรับภาระการเชื่อมต่อข้อมูล
-3. **Responsive & Adaptive Layout:** ใช้ Tailwind CSS v.4 ควบคุมเลย์เอาต์ โดยออกแบบให้หน้าจอเดสก์ท็อปแสดงผลเป็นบอร์ด Kanban แบบ 3 คอลัมน์ และปรับเป็นรูปแบบ Accordion (เปิด-ปิดทีละสถานะ) โดยอัตโนมัติเมื่อใช้งานบนหน้าจอมือถือ เพื่อประสบการณ์การใช้งานที่ลื่นไหลที่สุด
+---
 
 ## เครื่องมือและเทคโนโลยี (Technology Stack)
 
-**Frontend Environment:**
+**Frontend Environment**
 
-- Angular (TypeScript)
-- RxJS (Reactive Extensions for JavaScript)
-- Tailwind CSS v.4
-- HTML5 / Vanilla JS (Mockup UI)
+- **Framework:** Angular (TypeScript)
+- **Reactivity:** RxJS (Reactive Extensions for JavaScript)
+- **Styling:** Tailwind CSS v.4
+- **Hosting:** Vercel
 
-**Backend Environment:**
+**External Dependencies (Backend Integration)**
 
-- Java (JDK 17+)
-- Spring Boot 3.x
-- Spring Web (RESTful APIs)
-- Spring Data JPA
-- PostgreSQL Driver
+- **API Service:** Java Spring Boot 3.x (RESTful APIs)
+- **Database:** PostgreSQL
 
-**Infrastructure & Tooling:**
+---
 
-- PostgreSQL
-- Maven (Dependency Management)
-- Node.js & npm
-- Git (Version Control)
+## การตั้งค่าและการติดตั้ง (Setup & Deployment)
 
-## ฟีเจอร์หลัก (Key Features)
+โปรเจกต์นี้ได้รับการปรับแต่งโครงสร้างให้สอดคล้องกับการนำไปประยุกต์ใช้บนแพลตฟอร์มคลาวด์ **Vercel** โดยมีรายละเอียดที่ต้องดำเนินการดังนี้:
 
-- **Triage Registration:** ระบบลงทะเบียนด่วนสำหรับคัดกรองผู้ป่วย โดยระบุอาการและระดับความเร่งด่วน (Normal, Urgent, Emergency)
-- **Dynamic Queue Board:** กระดานแสดงผลแบบ Kanban ที่อัปเดตสถานะของผู้ป่วยใน 3 ระยะ: รอรับการรักษา (Waiting), กำลังรักษา (In Treatment), และจำหน่ายกลับ (Discharged)
-- **Adaptive Mobile View:** อินเทอร์เฟซที่ปรับตัวเองให้เหมาะสมกับขนาดหน้าจอ ช่วยให้เจ้าหน้าที่ใช้งานผ่านอุปกรณ์พกพาได้อย่างสะดวก
+### 1. การจัดการ Environment Variables
+
+ระบบรองรับการสลับ URL ของ Backend API ตามสภาพแวดล้อมโดยอัตโนมัติ
+
+- **Development:** ชี้ไปที่ `http://localhost:8080/api/v1/patients`
+- **Production:** จำเป็นต้องระบุ URL ของคลาวด์เซิร์ฟเวอร์ Railway ในไฟล์ `src/environments/environment.ts`
+
+### 2. การจัดการ SPA Routing บน Vercel
+
+เพื่อป้องกันปัญหา `404 Not Found` เมื่อผู้ใช้งานรีเฟรชหน้าเว็บ หรือเข้าถึงแอปพลิเคชันผ่าน URL ย่อยโดยตรง โครงสร้างโปรเจกต์จึงได้มีการแนบไฟล์ `vercel.json` ในระดับ Root Directory เพื่อบังคับให้ Vercel ทำการ Rewrite Route ทั้งหมดกลับไปที่ `index.html`:
+
+```json
+{
+  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
+}
+```
+
+---
+
+## บันทึกการเปลี่ยนแปลง (Changelog)
+
+**[v1.1.0] - 2026-06-07**
+
+- **Added:** นำเสนอระบบ Skeleton Loading UI สำหรับสถานะเรนเดอร์ข้อมูลแบบ Asynchronous
+- **Added:** ปรับแต่งโครงสร้างไฟล์สำหรับการ Deploy บน Vercel ผ่านการตั้งค่า `vercel.json` (SPA Routing Rule)
+- **Added:** รองรับระบบ Environment Variables เพื่อแยกระหว่างโหมด Development (`ng serve`) และ Production (`ng build`)
+- **Refactored:** จัดระเบียบ Control Flow (`@if`, `@else`, `@for`, `@empty`) ตามมาตรฐานโครงสร้างใหม่ของ Angular เพื่อลดปัญหาการ Render แข่งขันกันระหว่าง State
+- **Fixed:** แก้ไขข้อผิดพลาดทางไวยากรณ์ `TS1117` จากการระบุชื่อคลาส CSS ซ้ำซ้อนใน `[ngClass]` บริเวณขอบและป้ายสถานะของการ์ดผู้ป่วย
